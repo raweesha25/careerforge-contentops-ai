@@ -1,0 +1,104 @@
+CareerForge ContentOps AI
+Tagline
+
+AI-powered content operations platform that helps educational organizations create professional and financial growth content for students.
+
+Problem
+
+Students often struggle to:
+
+Choose the right career path
+Build marketable skills
+Create a strong portfolio
+Prepare for interviews
+Find internships
+Start freelancing
+Become financially independent
+
+Most educational content is scattered and overwhelming.
+
+Solution
+
+CareerForge ContentOps AI uses multiple AI agents to generate high-quality educational and career-growth content.
+
+Target Audience
+Primary
+University students
+College students
+Fresh graduates
+Secondary
+Career coaches
+Educational institutions
+Training academies
+Business Goal
+
+Help students:
+
+Become job-ready
+Build portfolios
+Learn high-income skills
+Start freelancing
+Improve employability
+Increase earning potential
+MVP Features
+
+Input:
+
+Topic:
+AI Careers
+
+Audience:
+University Students
+
+Goal:
+Get First Remote Job
+
+Output:
+
+✓ Career Insights
+
+✓ Skill Roadmap
+
+✓ Portfolio Project Ideas
+
+✓ LinkedIn Post
+
+✓ Reel Script
+
+✓ Image Prompt
+
+✓ Action Plan
+Agents
+Research Agent
+
+Researches:
+
+Industry trends
+Student challenges
+Career opportunities
+Roadmap Agent
+
+Creates:
+
+Learning path
+Skill roadmap
+Content Agent
+
+Generates:
+
+Posts
+Articles
+Scripts
+Visual Agent
+
+Generates:
+
+Image prompts
+Animation prompts
+Review Agent
+
+Checks:
+
+Quality
+Clarity
+Actionability

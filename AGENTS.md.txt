@@ -1,0 +1,104 @@
+# CareerForge ContentOps AI - Agent Specifications
+
+## Research Agent
+
+### Input
+
+* Topic
+* Audience
+* Goal
+
+### Example
+
+Topic: AI Careers
+
+Audience: University Students
+
+Goal: Get First Remote Job
+
+### Output
+
+* Industry Trends
+* Student Challenges
+* Career Opportunities
+* Recommended Skills
+
+---
+
+## Roadmap Agent
+
+### Input
+
+Research Agent Output
+
+### Output
+
+* 30-Day Learning Plan
+* Skill Roadmap
+* Weekly Milestones
+
+### Example
+
+Week 1
+
+* Learn AI Fundamentals
+
+Week 2
+
+* Build First AI Project
+
+Week 3
+
+* Create Portfolio
+
+Week 4
+
+* Apply for Internships
+
+---
+
+## Content Agent
+
+### Output
+
+* Facebook Post
+* LinkedIn Post
+* Blog Outline
+* Reel Script
+
+### Goal
+
+Educate students and motivate action.
+
+---
+
+## Visual Agent
+
+### Output
+
+* Image Prompt
+* Animation Prompt
+* Thumbnail Idea
+
+### Goal
+
+Create engaging visuals for educational content.
+
+---
+
+## Review Agent
+
+### Output
+
+* Quality Score
+* Improvement Suggestions
+* Engagement Rating
+
+### Example
+
+Quality Score: 9/10
+
+Suggestions:
+
+* Stronger CTA
+* More specific examples
