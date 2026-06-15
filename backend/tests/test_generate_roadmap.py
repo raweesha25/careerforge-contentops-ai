@@ -20,6 +20,7 @@ def test_generate_roadmap_returns_expected_shape():
             "careerTopic": "AI Engineering",
             "targetAudience": "University Students",
             "careerGoal": "Get a remote internship",
+            "currentSkills": "Python, SQL",
         },
     )
 
@@ -29,6 +30,8 @@ def test_generate_roadmap_returns_expected_shape():
     assert set(data) == {
         "careerPath",
         "skills",
+        "skillGap",
+        "learningRoadmap",
         "portfolioProjects",
         "incomeOpportunities",
         "actionPlan",
@@ -36,6 +39,9 @@ def test_generate_roadmap_returns_expected_shape():
     }
     assert isinstance(data["careerPath"], str)
     assert len(data["skills"]) == 5
+    assert data["skillGap"]["currentSkills"] == ["Python", "SQL"]
+    assert data["skillGap"]["skillsToBuild"]
+    assert len(data["learningRoadmap"]) == 4
     assert len(data["portfolioProjects"]) == 3
     assert len(data["incomeOpportunities"]) == 3
     assert len(data["actionPlan"]) == 4

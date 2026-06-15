@@ -3,12 +3,14 @@ def researchAgent(input_data: dict) -> dict:
     career_topic = input_data["careerTopic"].strip() or "Technology"
     target_audience = input_data["targetAudience"].strip() or "students"
     career_goal = input_data["careerGoal"].strip() or "start a career"
+    current_skills = input_data.get("currentSkills", "").strip()
 
     return {
         **input_data,
         "careerTopic": career_topic,
         "targetAudience": target_audience,
         "careerGoal": career_goal,
+        "currentSkills": current_skills,
         "industryTrends": [
             f"Employers increasingly value practical {career_topic} experience.",
             "Portfolio evidence is becoming more important than certificates alone.",
@@ -31,6 +33,12 @@ def careerAnalysisAgent(research_data: dict) -> dict:
     # Career Analysis Agent: turns research into a focused career direction.
     career_topic = research_data["careerTopic"]
     career_goal = research_data["careerGoal"]
+    current_skills = research_data["currentSkills"]
+    current_skill_list = [
+        skill.strip()
+        for skill in current_skills.split(",")
+        if skill.strip()
+    ]
 
     return {
         **research_data,
@@ -45,15 +53,68 @@ def careerAnalysisAgent(research_data: dict) -> dict:
             "Professional communication",
             "Interview and application preparation",
         ],
+        "currentSkillList": current_skill_list,
     }
 
 
-def roadmapAgent(career_data: dict) -> dict:
-    # Roadmap Agent: converts the career direction into weekly execution steps.
+def skillGapAgent(career_data: dict) -> dict:
+    # Skill Gap Agent: compares current skills with target skills.
     skills = career_data["skills"]
+    current_skill_list = career_data["currentSkillList"]
+    normalized_current_skills = {
+        skill.lower()
+        for skill in current_skill_list
+    }
+    skills_to_build = [
+        skill
+        for skill in skills
+        if skill.lower() not in normalized_current_skills
+    ]
 
     return {
         **career_data,
+        "skillGap": {
+            "currentSkills": current_skill_list
+            if current_skill_list
+            else ["No current skills provided"],
+            "recommendedSkills": skills,
+            "skillsToBuild": skills_to_build,
+            "summary": (
+                "Focus first on the skills that convert learning into visible "
+                "portfolio proof and job applications."
+            ),
+        },
+    }
+
+
+def roadmapAgent(skill_gap_data: dict) -> dict:
+    # Roadmap Agent: converts the career direction into weekly execution steps.
+    skills = skill_gap_data["skills"]
+
+    return {
+        **skill_gap_data,
+        "learningRoadmap": [
+            {
+                "phase": "Foundation",
+                "timeline": "Days 1-7",
+                "focus": f"Learn {skills[0]} and write short notes daily.",
+            },
+            {
+                "phase": "Practice",
+                "timeline": "Days 8-14",
+                "focus": f"Use {skills[1]} to complete small guided exercises.",
+            },
+            {
+                "phase": "Build",
+                "timeline": "Days 15-24",
+                "focus": f"Create a portfolio project around {skills[2]}.",
+            },
+            {
+                "phase": "Apply",
+                "timeline": "Days 25-30",
+                "focus": f"Use {skills[3]} and {skills[4]} to prepare applications.",
+            },
+        ],
         "actionPlan": [
             f"Week 1: Learn {skills[0]} and summarize the core concepts.",
             f"Week 2: Practice {skills[1]} with three small exercises.",

@@ -10,6 +10,7 @@ try:
         portfolioAgent,
         researchAgent,
         roadmapAgent,
+        skillGapAgent,
     )
 except ImportError:
     from services.agents import (
@@ -19,6 +20,7 @@ except ImportError:
         portfolioAgent,
         researchAgent,
         roadmapAgent,
+        skillGapAgent,
     )
 
 
@@ -37,11 +39,14 @@ class RoadmapRequest(BaseModel):
     careerTopic: str
     targetAudience: str
     careerGoal: str
+    currentSkills: str = ""
 
 
 class RoadmapResponse(BaseModel):
     careerPath: str
     skills: list[str]
+    skillGap: dict[str, object]
+    learningRoadmap: list[dict[str, str]]
     portfolioProjects: list[str]
     incomeOpportunities: list[str]
     actionPlan: list[str]
@@ -59,7 +64,8 @@ def generate_roadmap(request: RoadmapRequest):
 
     research_data = researchAgent(input_data)
     career_data = careerAnalysisAgent(research_data)
-    roadmap_data = roadmapAgent(career_data)
+    skill_gap_data = skillGapAgent(career_data)
+    roadmap_data = roadmapAgent(skill_gap_data)
     portfolio_data = portfolioAgent(roadmap_data)
     income_data = incomeAgent(portfolio_data)
     content_data = contentAgent(income_data)
@@ -67,6 +73,8 @@ def generate_roadmap(request: RoadmapRequest):
     return {
         "careerPath": content_data["careerPath"],
         "skills": content_data["skills"],
+        "skillGap": content_data["skillGap"],
+        "learningRoadmap": content_data["learningRoadmap"],
         "portfolioProjects": content_data["portfolioProjects"],
         "incomeOpportunities": content_data["incomeOpportunities"],
         "actionPlan": content_data["actionPlan"],

@@ -5,6 +5,7 @@ from backend.services.agents import (
     portfolioAgent,
     researchAgent,
     roadmapAgent,
+    skillGapAgent,
 )
 
 
@@ -13,6 +14,7 @@ def test_agent_pipeline_passes_data_between_steps():
         "careerTopic": "AI Engineering",
         "targetAudience": "University Students",
         "careerGoal": "Get a remote internship",
+        "currentSkills": "Python, SQL",
     }
 
     research_data = researchAgent(input_data)
@@ -26,8 +28,14 @@ def test_agent_pipeline_passes_data_between_steps():
     career_data = careerAnalysisAgent(research_data)
     assert "AI Engineering" in career_data["careerPath"]
     assert career_data["skills"]
+    assert career_data["currentSkillList"] == ["Python", "SQL"]
 
-    roadmap_data = roadmapAgent(career_data)
+    skill_gap_data = skillGapAgent(career_data)
+    assert skill_gap_data["skillGap"]["currentSkills"] == ["Python", "SQL"]
+    assert skill_gap_data["skillGap"]["skillsToBuild"]
+
+    roadmap_data = roadmapAgent(skill_gap_data)
+    assert len(roadmap_data["learningRoadmap"]) == 4
     assert len(roadmap_data["actionPlan"]) == 4
 
     portfolio_data = portfolioAgent(roadmap_data)
@@ -51,9 +59,11 @@ def test_research_agent_uses_defaults_for_blank_input():
             "careerTopic": " ",
             "targetAudience": " ",
             "careerGoal": " ",
+            "currentSkills": " ",
         }
     )
 
     assert research_data["careerTopic"] == "Technology"
     assert research_data["targetAudience"] == "students"
     assert research_data["careerGoal"] == "start a career"
+    assert research_data["currentSkills"] == ""

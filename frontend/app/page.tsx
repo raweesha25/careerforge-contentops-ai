@@ -5,6 +5,17 @@ import { useState } from "react";
 type RoadmapResponse = {
   careerPath: string;
   skills: string[];
+  skillGap: {
+    currentSkills: string[];
+    recommendedSkills: string[];
+    skillsToBuild: string[];
+    summary: string;
+  };
+  learningRoadmap: {
+    phase: string;
+    timeline: string;
+    focus: string;
+  }[];
   portfolioProjects: string[];
   incomeOpportunities: string[];
   actionPlan: string[];
@@ -20,6 +31,7 @@ export default function Home() {
   const [careerTopic, setCareerTopic] = useState("");
   const [targetAudience, setTargetAudience] = useState("");
   const [careerGoal, setCareerGoal] = useState("");
+  const [currentSkills, setCurrentSkills] = useState("");
   const [roadmap, setRoadmap] = useState<RoadmapResponse | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
@@ -51,6 +63,7 @@ export default function Home() {
           careerTopic: careerTopic.trim(),
           targetAudience: targetAudience.trim(),
           careerGoal: careerGoal.trim(),
+          currentSkills: currentSkills.trim(),
         }),
       });
 
@@ -125,6 +138,14 @@ export default function Home() {
               placeholder="Career Goal"
               value={careerGoal}
               onChange={(event) => setCareerGoal(event.target.value)}
+              className="w-full p-4 rounded-lg bg-black border border-zinc-700"
+            />
+
+            <input
+              type="text"
+              placeholder="Current Skills (optional, comma separated)"
+              value={currentSkills}
+              onChange={(event) => setCurrentSkills(event.target.value)}
               className="w-full p-4 rounded-lg bg-black border border-zinc-700"
             />
 
@@ -213,6 +234,63 @@ export default function Home() {
                       </li>
                     ))}
                   </ul>
+                </div>
+              </div>
+
+              <div className="border border-zinc-800 rounded-xl p-5 bg-black/40">
+                <h3 className="text-xl font-semibold mb-3">
+                  Skill Gap Analysis
+                </h3>
+                <p className="text-gray-300 leading-7 mb-4">
+                  {roadmap.skillGap.summary}
+                </p>
+                <div className="grid gap-4 md:grid-cols-3">
+                  <div className="border border-zinc-800 rounded-lg p-4">
+                    <h4 className="font-semibold mb-2">Current Skills</h4>
+                    <ul className="space-y-2 text-gray-300">
+                      {roadmap.skillGap.currentSkills.map((skill) => (
+                        <li key={skill}>{skill}</li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="border border-zinc-800 rounded-lg p-4">
+                    <h4 className="font-semibold mb-2">Recommended Skills</h4>
+                    <ul className="space-y-2 text-gray-300">
+                      {roadmap.skillGap.recommendedSkills.map((skill) => (
+                        <li key={skill}>{skill}</li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="border border-zinc-800 rounded-lg p-4">
+                    <h4 className="font-semibold mb-2">Skills To Build</h4>
+                    <ul className="space-y-2 text-gray-300">
+                      {roadmap.skillGap.skillsToBuild.map((skill) => (
+                        <li key={skill}>{skill}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div className="border border-zinc-800 rounded-xl p-5 bg-black/40">
+                <h3 className="text-xl font-semibold mb-3">
+                  Learning Roadmap
+                </h3>
+                <div className="grid gap-4 md:grid-cols-2">
+                  {roadmap.learningRoadmap.map((phase) => (
+                    <div
+                      key={phase.phase}
+                      className="border border-zinc-800 rounded-lg p-4"
+                    >
+                      <p className="text-sm text-blue-400 mb-1">
+                        {phase.timeline}
+                      </p>
+                      <h4 className="font-semibold mb-2">{phase.phase}</h4>
+                      <p className="text-gray-300 leading-7">{phase.focus}</p>
+                    </div>
+                  ))}
                 </div>
               </div>
 

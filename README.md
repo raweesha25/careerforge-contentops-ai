@@ -8,6 +8,8 @@ The app uses a Next.js frontend and a FastAPI backend with a simple multi-agent 
 
 - Career roadmap generation from a topic, audience, and goal
 - Multi-agent backend architecture
+- Skill Gap Analyzer based on optional current skills
+- 30-day learning roadmap with focused phases
 - Skills, portfolio project ideas, income opportunities, and weekly action plan
 - Content Toolkit with LinkedIn post, portfolio bio, project pitch, and reel script
 - Copy buttons for generated content
@@ -63,7 +65,8 @@ Expected request body:
 {
   "careerTopic": "AI Engineering",
   "targetAudience": "University Students",
-  "careerGoal": "Get a remote internship"
+  "careerGoal": "Get a remote internship",
+  "currentSkills": "Python, SQL"
 }
 ```
 
@@ -98,6 +101,7 @@ http://localhost:3000
 ```text
 researchAgent()
   -> careerAnalysisAgent()
+  -> skillGapAgent()
   -> roadmapAgent()
   -> portfolioAgent()
   -> incomeAgent()
